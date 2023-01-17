@@ -1,36 +1,16 @@
-const Admin=require('../models/admin');
-const Student=require('../models/student');
 
-const registerStudent=async(req,res)=>{
+
+
+
+const loginUser=async(req, res)=>{
     try{
-        const fetchedUser=req.body;
-        const createdUser=await Student.create(fetchedUser);
-        res.status(200).send({
-            user:createdUser
-        })
 
     }catch(e){
-        console.log("Error al registrar usuario: ",e);
-        res.status(400).send("Error al registrar usuario");
-    }
-}
-
-
-const registerAdmin=async(req,res)=>{
-    try{
-        const fetchedUser=req.body;
-        const createdUser=await Admin.create(fetchedUser);
-        res.status(200).send({
-            user:createdUser
-        })
-
-    }catch(e){
-        console.log("Error al registrar usuario: ",e);
-        res.status(400).send("Error al registrar usuario");
+        console.log("Error al iniciar sesión");
+        res.status(400).send("Error al iniciar sesión");
     }
 }
 
 module.exports={
-    registerAdmin,
-    registerStudent
+    loginUser
 }
