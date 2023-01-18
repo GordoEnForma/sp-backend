@@ -17,11 +17,9 @@ dbConnect();
 app.use('/auth',authRouter);
 
 //Rutas de admin
-
 app.use('/users',userRouter)
 
 //Rutas de estudiante
-
 app.listen(process.env.PORT,()=>{
     console.log(`SERVIDOR CORRIENDO EN EL PUERTO ${process.env.PORT}`);
-})
+}) 

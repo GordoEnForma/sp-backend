@@ -1,6 +1,6 @@
-const User=require('../../models/user');
-const Admin=require('../../models/admin');
-const Student=require('../../models/student');
+const User=require('../../models/users/user');
+const Admin=require('../../models/users/admin');
+const Student=require('../../models/users/student');
 //Create
 const createAdmin=async(req, res)=>{
     try{

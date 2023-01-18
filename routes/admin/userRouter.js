@@ -22,4 +22,5 @@ router.route('/student')
 
 router.route('/:id')
 .get(getUserById);
+
 module.exports=router;
