@@ -1,5 +1,14 @@
 const mongoose=require('mongoose');
 
+const opciones=['A','B','C','D','E'];
+/*
+alternativa={
+    opcion:'A',
+    descripcion:'lorem ipsum',
+}
+
+*/
+
 const preguntaSchema=new mongoose.Schema({
     descripcion:{
         type:String,
@@ -13,10 +22,11 @@ const preguntaSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'TemaEspecifico'
     }],
-    alternativas:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Alternativa',
-    }],
+    alternativas:[],
+    opcionCorrecta:{
+        type:String,
+        enum:opciones,
+    },
     justificacion:{
         type:String,
     }

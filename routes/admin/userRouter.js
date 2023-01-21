@@ -4,10 +4,10 @@ const { getUsers, getAdminUsers, getUserById, getStudentUsers, createAdmin, crea
 const router=express.Router();
 
 //create
-router.route('/register-admin')
+router.route('/registrar-admin')
 .post(createAdmin);
 
-router.route('/register-student')
+router.route('/registrar-estudiante')
 .post(createStudent)
 
 //read
@@ -17,7 +17,7 @@ router.route('/')
 router.route('/admin')
 .get(getAdminUsers);
 
-router.route('/student')
+router.route('/estudiante')
 .get(getStudentUsers);
 
 router.route('/:id')

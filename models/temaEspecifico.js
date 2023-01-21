@@ -9,10 +9,6 @@ const temaEspecificoSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'TemaGeneral'
     },
-    producto:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Producto'
-    },
     preguntas:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Pregunta',

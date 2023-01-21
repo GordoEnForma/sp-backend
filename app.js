@@ -4,6 +4,9 @@ require('dotenv').config();
 const dbConnect = require('./config/database');
 const authRouter = require('./routes/authRouter');
 const userRouter=require('./routes/admin/userRouter');
+const productRouter=require('./routes/admin/productRouter');
+const temaGeneralRouter=require('./routes/admin/temaGeneralRouter');
+const temaEspecificoRouter=require('./routes/admin/temaEspecificoRouter');
 const app=express();
 
 //Dependencias
@@ -17,7 +20,10 @@ dbConnect();
 app.use('/auth',authRouter);
 
 //Rutas de admin
-app.use('/users',userRouter)
+app.use('/usuarios',userRouter);
+app.use('/productos',productRouter);
+app.use('/tema-general',temaGeneralRouter);
+app.use('/tema-especifico',temaEspecificoRouter);
 
 //Rutas de estudiante
 app.listen(process.env.PORT,()=>{

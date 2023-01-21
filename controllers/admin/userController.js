@@ -7,7 +7,7 @@ const createAdmin=async(req, res)=>{
         const fetchedUser=req.body;
         const createdUser=await Admin.create(fetchedUser);
         res.status(200).send({
-            user:createdUser
+            data:createdUser
         })
 
     }catch(e){
@@ -21,7 +21,7 @@ const createStudent=async(req, res)=>{
         const fetchedUser=req.body;
         const createdUser=await Student.create(fetchedUser);
         res.status(200).send({
-            user:createdUser
+            data:createdUser
         })
 
     }catch(e){
