@@ -1,5 +1,7 @@
 const Producto = require("../../models/producto");
 
+
+//Create
 const createProducto=async(req,res)=>{
     try{
         const fetchedProduct=req.body;
@@ -15,7 +17,7 @@ const createProducto=async(req,res)=>{
 
 const getProductos=async(req, res)=>{
     try{
-        const Products=await Producto.find();
+        const Products=await Producto.find().populate('temasEspecificos','nombre preguntas');
         res.status(200).send({data:Products});
     }catch(e){
         console.log("Error al obtener lista de productos");
@@ -24,7 +26,33 @@ const getProductos=async(req, res)=>{
 }
 
 
+
+//Read
+
+//Update
+
+//agregar tema especifico a producto
+const agregarTemaEspecífico=async(req,res)=>{
+    try{
+        const productoId= req.params.id;
+        const temaEspecificoId= req.body.temaEspecificoId;
+
+       
+        const updatedProducto=await Producto.findByIdAndUpdate(productoId,
+            {$push:{temasEspecificos:temaEspecificoId}},{returnDocument: 'after'});
+        
+        res.status(200).send({data:updatedProducto});
+    }catch(e){
+        console.log("Error al agregar un tema específico al producto");
+        res.status(400).send("Error al agregar un tema específico al producto");
+    }
+}
+
+
+//Delete
+
 module.exports={
     createProducto,
-    getProductos
+    getProductos,
+    agregarTemaEspecífico
 }

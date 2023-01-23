@@ -7,6 +7,7 @@ const userRouter=require('./routes/admin/userRouter');
 const productRouter=require('./routes/admin/productRouter');
 const temaGeneralRouter=require('./routes/admin/temaGeneralRouter');
 const temaEspecificoRouter=require('./routes/admin/temaEspecificoRouter');
+const preguntaRouter=require('./routes/admin/preguntaRouter');
 const app=express();
 
 //Dependencias
@@ -24,6 +25,7 @@ app.use('/usuarios',userRouter);
 app.use('/productos',productRouter);
 app.use('/tema-general',temaGeneralRouter);
 app.use('/tema-especifico',temaEspecificoRouter);
+app.use('/preguntas',preguntaRouter);
 
 //Rutas de estudiante
 app.listen(process.env.PORT,()=>{

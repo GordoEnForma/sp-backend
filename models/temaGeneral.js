@@ -9,7 +9,10 @@ const temaGeneralSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'TemaEspecifico'
     }],
- 
+    preguntas:[{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Pregunta',
+    }]
 })
 
 module.exports=mongoose.model('TemaGeneral',temaGeneralSchema);

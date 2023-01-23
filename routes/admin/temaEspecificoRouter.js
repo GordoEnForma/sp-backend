@@ -1,12 +1,14 @@
 const express=require('express');
-const { createTemaEspecifico, getTemasEspecificos } = require('../../controllers/admin/temaEspecificoController');
+const { createTemaEspecifico, getTemasEspecificos, getTemaEspecificoById } = require('../../controllers/admin/temaEspecificoController');
 const router=express.Router();
 
-router.route('/:id')
+router.route('/:temaGeneralId')
 .post(createTemaEspecifico);
 
 router.route('/')
-.get(getTemasEspecificos)
+.get(getTemasEspecificos);
 
+router.route('/:id')
+.get(getTemaEspecificoById);
 
 module.exports=router;
