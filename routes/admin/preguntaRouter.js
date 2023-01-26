@@ -1,5 +1,5 @@
 const express=require('express');
-const { createPregunta, getPreguntas, agregarATemaEspecifico } = require('../../controllers/admin/preguntaController');
+const { createPregunta, getPreguntas, agregarATemaEspecifico, getPreguntaById } = require('../../controllers/admin/preguntaController');
 const router=express.Router();
 
 router.route('/:temaGeneralId')
@@ -9,5 +9,6 @@ router.route('/')
 .get(getPreguntas);
 
 router.route('/:id')
+.get(getPreguntaById)
 .put(agregarATemaEspecifico);
 module.exports=router;

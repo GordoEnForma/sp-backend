@@ -15,7 +15,7 @@ const createTemaGeneral=async(req,res)=>{
 
 const getTemasGenerales=async(req, res)=>{
     try{
-        const temas=await TemaGeneral.find().populate('temasEspecificos','nombre');
+        const temas=await TemaGeneral.find().populate('temasEspecificos','nombre').populate('preguntas','descripcion');
         res.status(200).send({data:temas});
     }catch(e){
         console.log("Error al obtener lista de temas generales");
@@ -27,7 +27,7 @@ const getTemasGenerales=async(req, res)=>{
 const getTemaGeneralById=async(req,res)=>{
     try{
         const temaId= req.params.id;
-        const tema=await TemaGeneral.findById(temaId).populate('temasEspecificos','nombre');
+        const tema=await TemaGeneral.findById(temaId).populate('temasEspecificos','nombre').populate('preguntas','descripcion');
         res.status(200).send({data:tema});
     }catch(e){
         console.log("Error al obtener el tema general");

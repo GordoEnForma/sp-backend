@@ -10,8 +10,11 @@ const createTemaEspecifico = async (req, res) => {
       temaGeneral: temaGeneralId,
     });
 
-    const updatedTemaGeneral=await actualizarTemaGeneral(temaGeneralId,createdTemaEspecifico);
-    
+    const updatedTemaGeneral = await actualizarTemaGeneral(
+      temaGeneralId,
+      createdTemaEspecifico
+    );
+
     res.status(200).send({
       data: createdTemaEspecifico,
       updatedTemaGeneral,
@@ -24,7 +27,9 @@ const createTemaEspecifico = async (req, res) => {
 
 const getTemasEspecificos = async (req, res) => {
   try {
-    const Temas = await TemaEspecifico.find().populate("temaGeneral", "nombre").populate('preguntas','descripcion');
+    const Temas = await TemaEspecifico.find()
+      .populate("temaGeneral", "nombre")
+      .populate("preguntas", "descripcion");
     res.status(200).send({ data: Temas });
   } catch (e) {
     console.log("Error al obtener lista de Temas especificos");
@@ -36,10 +41,9 @@ const getTemasEspecificos = async (req, res) => {
 const getTemaEspecificoById = async (req, res) => {
   try {
     const temaId = req.params.id;
-    const tema = await TemaEspecifico.findById(temaId).populate(
-      "temaGeneral",
-      "nombre"
-    ).populate('preguntas','descripcion');
+    const tema = await TemaEspecifico.findById(temaId)
+      .populate("temaGeneral", "nombre")
+      .populate("preguntas", "descripcion");
     res.status(200).send({ data: tema });
   } catch (e) {
     console.log("Error al obtener el tema específico");
@@ -47,16 +51,15 @@ const getTemaEspecificoById = async (req, res) => {
   }
 };
 
-
 //Update
-const actualizarTemaGeneral=async(temaGeneralId, createdTemaEspecifico)=>{
+const actualizarTemaGeneral = async (temaGeneralId, createdTemaEspecifico) => {
   const updatedTemaGeneral = await TemaGeneral.findByIdAndUpdate(
     temaGeneralId,
     { $push: { temasEspecificos: createdTemaEspecifico._id } },
     { returnDocument: "after" }
   );
   return updatedTemaGeneral;
-}
+};
 //Delete
 
 module.exports = {

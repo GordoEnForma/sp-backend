@@ -36,6 +36,18 @@ const getPreguntas = async (req, res) => {
     res.status(400).send("Error al obtener lista de preguntas");
   }
 };
+
+const getPreguntaById = async (req, res) => {
+  try {
+    const preguntaId=req.params.id;
+    const pregunta = await Pregunta.findById(preguntaId).populate('temaGeneral','nombre').populate('temasEspecificos','nombre');
+    res.status(200).send({ data: pregunta })
+  } catch (e) {
+    console.log("Error al obtener pregunta: ",e);
+    res.status(400).send("Error al obtener pregunta");
+  }
+};
+
 //Update
 const actualizarTemaGeneral=async(TemaGeneralId,createdPregunta)=>{
   const updatedTemaGeneral = await TemaGeneral.findByIdAndUpdate(
@@ -71,5 +83,6 @@ const agregarATemaEspecificoPorNombre=async(temaEspecifico)=>{
 module.exports = {
   createPregunta,
   getPreguntas,
-  agregarATemaEspecifico,
+  getPreguntaById,
+  agregarATemaEspecifico
 };
