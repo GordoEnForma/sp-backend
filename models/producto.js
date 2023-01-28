@@ -4,9 +4,9 @@ const productoSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    temasEspecificos:[{
+    temas:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'TemaEspecifico'
+        ref:'Tema'
     }]
 })
 

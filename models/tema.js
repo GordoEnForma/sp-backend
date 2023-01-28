@@ -5,14 +5,10 @@ const temaGeneralSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    temasEspecificos:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'TemaEspecifico'
-    }],
     preguntas:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Pregunta',
     }]
 })
 
-module.exports=mongoose.model('TemaGeneral',temaGeneralSchema);
+module.exports=mongoose.model('Tema',temaGeneralSchema);

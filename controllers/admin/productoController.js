@@ -17,7 +17,7 @@ const createProducto=async(req,res)=>{
 
 const getProductos=async(req, res)=>{
     try{
-        const Products=await Producto.find().populate('temasEspecificos','nombre preguntas');
+        const Products=await Producto.find().populate('temas','nombre preguntas');
         res.status(200).send({data:Products});
     }catch(e){
         console.log("Error al obtener lista de productos");
@@ -32,19 +32,19 @@ const getProductos=async(req, res)=>{
 //Update
 
 //agregar tema especifico a producto
-const agregarTemaEspecífico=async(req,res)=>{
+const agregarTema=async(req,res)=>{
     try{
         const productoId= req.params.id;
-        const temaEspecificoId= req.body.temaEspecificoId;
+        const temaId= req.body.temaId;
 
        
         const updatedProducto=await Producto.findByIdAndUpdate(productoId,
-            {$push:{temasEspecificos:temaEspecificoId}},{returnDocument: 'after'});
+            {$push:{temas:temaId}},{returnDocument: 'after'});
         
         res.status(200).send({data:updatedProducto});
     }catch(e){
-        console.log("Error al agregar un tema específico al producto");
-        res.status(400).send("Error al agregar un tema específico al producto");
+        console.log("Error al agregar un tema al producto");
+        res.status(400).send("Error al agregar un tema al producto");
     }
 }
 
@@ -54,5 +54,5 @@ const agregarTemaEspecífico=async(req,res)=>{
 module.exports={
     createProducto,
     getProductos,
-    agregarTemaEspecífico
+    agregarTema
 }

@@ -14,13 +14,9 @@ const preguntaSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    temaGeneral:{
+    temas:[{
         type:mongoose.Schema.Types.ObjectId,
-        ref:'TemaGeneral'
-    },
-    temasEspecificos:[{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'TemaEspecifico'
+        ref:'Tema'
     }],
     alternativas:[],
     opcionCorrecta:{
