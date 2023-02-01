@@ -32,7 +32,7 @@ const createStudent=async(req, res)=>{
 //Read
 const getUsers=async(req, res)=>{
     try{
-        const users=await User.find();
+        const users=await User.find({},'-__v');
         res.status(200).send({data:users});
     }catch(e){
         console.log("Error al obtener lista de usuarios");
@@ -41,7 +41,7 @@ const getUsers=async(req, res)=>{
 }
 const getAdminUsers=async(req, res)=>{
     try{
-        const admins=await Admin.find();
+        const admins=await Admin.find({},'-__v');
         res.status(200).send({data:admins});
     }catch(e){
         console.log("Error al obtener la lista de administradores");
@@ -51,7 +51,7 @@ const getAdminUsers=async(req, res)=>{
 
 const getStudentUsers=async(req, res)=>{
     try{
-        const students=await Student.find();
+        const students=await Student.find({},'-__v');
         res.status(200).send({data:students});
     }catch(e){
         console.log("Error al obtener la lista de estudiantes");
@@ -61,7 +61,7 @@ const getStudentUsers=async(req, res)=>{
 const getUserById=async(req, res)=>{
     try{
         const id=req.params.id;
-        const admin=await User.findById(id);
+        const admin=await User.findById(id,'-__v');
         res.status(200).send({data:admin});
     }catch(e){
         console.log("Error al obtener el usuario");

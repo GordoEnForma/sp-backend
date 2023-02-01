@@ -10,7 +10,6 @@ const createPregunta = async (req, res) => {
       ...fetchedPregunta,
       temas: [temaId],
     });
-    console.log("PREGUNTA CREADA: ", createdPregunta);
     const updatedTema = await actualizarTema(temaId, createdPregunta);
     res.status(200).send({
       data: createdPregunta,

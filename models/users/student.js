@@ -2,14 +2,19 @@ const mongoose=require('mongoose');
 const User = require('./user');
 
 const options={discriminatorKey:'role'};
+const estado=['activo','pendiente']
 const studentSchema=User.discriminator('student',
 new mongoose.Schema({
-    estado:{
-        type:Boolean,
-        default:false,
+    telefono:{
+        type:String,
     },
     producto:{
-
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'Producto'
+    },
+    estado:{
+        type:String,
+        enum:estado,
     }
 }),options);
 

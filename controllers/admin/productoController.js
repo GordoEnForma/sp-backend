@@ -17,7 +17,7 @@ const createProducto=async(req,res)=>{
 
 const getProductos=async(req, res)=>{
     try{
-        const Products=await Producto.find().populate('temas','nombre preguntas');
+        const Products=await Producto.find({},'-__v').populate('temas','nombre preguntas');
         res.status(200).send({data:Products});
     }catch(e){
         console.log("Error al obtener lista de productos");
