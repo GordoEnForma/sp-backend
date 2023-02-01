@@ -36,7 +36,7 @@ const getTemaById=async(req,res)=>{
     }
 }
 
-//------------------Por revisar-------------------------------//
+/*------------------Por revisar-------------------------------*/
 const agregarPreguntasATema=async(req, res)=>{
     try{
         const temaId=req.params.id;

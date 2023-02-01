@@ -8,7 +8,7 @@ const createPregunta = async (req, res) => {
     const fetchedPregunta = req.body;
     const createdPregunta = await Pregunta.create({
       ...fetchedPregunta,
-      temas: [temaId],
+      tema: temaId,
     });
     const updatedTema = await actualizarTema(temaId, createdPregunta);
     res.status(200).send({
@@ -27,7 +27,7 @@ const createPreguntaCompleta = async (req, res) => {
 //Read
 const getPreguntas = async (req, res) => {
   try {
-    const Preguntas = await Pregunta.find().populate("temas", "nombre");
+    const Preguntas = await Pregunta.find().populate("tema", "nombre");
     res.status(200).send({ data: Preguntas });
   } catch (e) {
     console.log("Error al obtener lista de preguntas: ", e);
@@ -39,7 +39,7 @@ const getPreguntaById = async (req, res) => {
   try {
     const preguntaId = req.params.id;
     const pregunta = await Pregunta.findById(preguntaId).populate(
-      "temas",
+      "tema",
       "nombre"
     );
     res.status(200).send({ data: pregunta });
@@ -50,11 +50,13 @@ const getPreguntaById = async (req, res) => {
 };
 
 //Update
+
+/*-----------------Por revisar............................ */
 const agregarATema = async (temaId, preguntaId) => {
   try {
     const updatedPregunta = await Pregunta.findByIdAndUpdate(
       preguntaId, 
-      { $push: { temas: temaId }});
+      { tema:temaId });
     const updatedTema = await actualizarTema(temaId, updatedPregunta);
     return updatedTema;
   } catch (e) {

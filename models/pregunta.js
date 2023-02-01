@@ -10,14 +10,18 @@ alternativa={
 */
 
 const preguntaSchema=new mongoose.Schema({
+    orden:{
+        type:Number,
+        required:true,
+    },
     descripcion:{
         type:String,
         required:true,
     },
-    temas:[{
+    tema:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Tema'
-    }],
+    },
     alternativas:[],
     opcionCorrecta:{
         type:String,
@@ -25,6 +29,7 @@ const preguntaSchema=new mongoose.Schema({
     },
     justificacion:{
         type:String,
-    }
+    },
 })
+    
 module.exports=mongoose.model('Pregunta',preguntaSchema)

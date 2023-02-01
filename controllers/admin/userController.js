@@ -51,7 +51,7 @@ const getAdminUsers=async(req, res)=>{
 
 const getStudentUsers=async(req, res)=>{
     try{
-        const students=await Student.find({},'-__v');
+        const students=await Student.find().populate('producto','nombre');
         res.status(200).send({data:students});
     }catch(e){
         console.log("Error al obtener la lista de estudiantes");
