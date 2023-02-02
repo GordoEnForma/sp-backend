@@ -1,5 +1,4 @@
 const mongoose=require('mongoose');
-const options={discriminatorKey:'role'};
 const userSchema=new mongoose.Schema({
     nombre:{
         type:String,
@@ -17,8 +16,11 @@ const userSchema=new mongoose.Schema({
     contrasena:{
         type:String,
         required:true,
-    }
-},options)
+    },
+},{
+    discriminatorKey:'role',
+    timestamps:true,
+})
 
 module.exports=mongoose.model('User',userSchema);
 

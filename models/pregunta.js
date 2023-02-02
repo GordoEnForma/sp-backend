@@ -30,6 +30,6 @@ const preguntaSchema=new mongoose.Schema({
     justificacion:{
         type:String,
     },
-})
+},{timestamps:true})
     
 module.exports=mongoose.model('Pregunta',preguntaSchema)

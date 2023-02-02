@@ -8,6 +8,6 @@ const productoSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         ref:'Tema'
     }]
-})
+},{timestamps:true})
 
 module.exports=mongoose.model('Producto',productoSchema);
