@@ -9,7 +9,7 @@ const verifyExistingUser = async (req, res, next) => {
 
     if (foundUser) {
         res.status(500).send({
-            error: "Un usuario con estas credenciales ya  existe, prueba con nuevos datos",
+            error: "Ya existe un usuario registrado con este correo, prueba con nuevos datos",
         });
         return;
     }
