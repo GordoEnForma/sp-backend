@@ -1,69 +1,77 @@
 const Producto = require("../../models/producto");
 
-
 //Create
-const createProducto=async(req,res)=>{
-    try{
-        const fetchedProduct=req.body;
-        const createdProduct=await Producto.create(fetchedProduct);
+const createProducto = async (req, res) => {
+    try {
+        const fetchedProduct = req.body;
+        const createdProduct = await Producto.create(fetchedProduct);
         res.status(200).send({
-            data:createdProduct
-        })
-    }catch(e){
-        console.log("Error al crear producto: ",e);
+            data: createdProduct,
+        });
+    } catch (e) {
+        console.log("Error al crear producto: ", e);
         res.status(400).send("Error al crear producto");
     }
-}
+};
 
-const getProductos=async(req, res)=>{
-    try{
-        const Products=await Producto.find({},'-__v').populate('temas','nombre preguntas');
-        res.status(200).send({data:Products});
-    }catch(e){
+const getProductos = async (req, res) => {
+    try {
+        const Products = await Producto.find({}, "-__v").populate({
+            path: "temas",
+            populate: {
+                path: "preguntas",
+            },
+        });
+        res.status(200).send({ data: Products });
+    } catch (e) {
         console.log("Error al obtener lista de productos");
         res.status(400).send("Error al obtener lista de productos");
     }
-}
-
-
+};
 
 //Read
-const getProductoById=async(req, res)=>{
-    try{
-        const id=req.params.id;
-        const producto=await Producto.findById(id,'-__v').populate('temas','nombre preguntas');
-        res.status(200).send({data:producto});
-    }catch(e){
+const getProductoById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const producto = await Producto.findById(id, "-__v").populate({
+            path: "temas",
+            populate: {
+                path: "preguntas",
+            },
+        });
+        res.status(200).send({ data: producto });
+    } catch (e) {
         console.log("Error al obtener el producto");
         res.status(400).send("Error al obtener el producto");
     }
-}
+};
 
 //Update
 
 //agregar tema especifico a producto
-const agregarTema=async(req,res)=>{
-    try{
-        const productoId= req.params.id;
-        const temaId= req.body.temaId;
+const agregarTema = async (req, res) => {
+    try {
+        const productoId = req.params.id;
+        const temaId = req.body.temaId;
 
-       
-        const updatedProducto=await Producto.findByIdAndUpdate(productoId,
-            {$push:{temas:temaId}},{returnDocument: 'after'});
-        
-        res.status(200).send({data:updatedProducto});
-    }catch(e){
+        const updatedProducto = await Producto.findByIdAndUpdate(
+            productoId,
+            { $push: { temas: temaId } },
+            { returnDocument: "after" }
+        );
+
+        res.status(200).send({ data: updatedProducto });
+    } catch (e) {
         console.log("Error al agregar un tema al producto");
         res.status(400).send("Error al agregar un tema al producto");
     }
-}
-
+};
 
 //Delete
 
-module.exports={
+module.exports = {
     createProducto,
     getProductos,
     getProductoById,
-    agregarTema
-}
+    agregarTema,
+};
