@@ -28,6 +28,16 @@ const getProductos=async(req, res)=>{
 
 
 //Read
+const getProductoById=async(req, res)=>{
+    try{
+        const id=req.params.id;
+        const producto=await Producto.findById(id,'-__v').populate('temas','nombre preguntas');
+        res.status(200).send({data:producto});
+    }catch(e){
+        console.log("Error al obtener el producto");
+        res.status(400).send("Error al obtener el producto");
+    }
+}
 
 //Update
 
@@ -54,5 +64,6 @@ const agregarTema=async(req,res)=>{
 module.exports={
     createProducto,
     getProductos,
+    getProductoById,
     agregarTema
 }
