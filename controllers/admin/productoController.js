@@ -48,24 +48,25 @@ const getProductoById = async (req, res) => {
 
 //Update
 
-//agregar tema especifico a producto
-const agregarTema = async (req, res) => {
+
+
+const agregarTemas=async(req, res)=>{
     try {
         const productoId = req.params.id;
-        const temaId = req.body.temaId;
-
+        const temasId = req.body.temasId;
+        console.log("Temas: ",temasId);
         const updatedProducto = await Producto.findByIdAndUpdate(
             productoId,
-            { $push: { temas: temaId } },
+            { $addToSet: { temas: {$each:temasId} } },
             { returnDocument: "after" }
         );
 
         res.status(200).send({ data: updatedProducto });
     } catch (e) {
-        console.log("Error al agregar un tema al producto");
-        res.status(400).send("Error al agregar un tema al producto");
+        console.log("Error al agregar temas al producto");
+        res.status(400).send("Error al agregar temas al producto");
     }
-};
+}
 
 //Delete
 
@@ -73,5 +74,5 @@ module.exports = {
     createProducto,
     getProductos,
     getProductoById,
-    agregarTema,
+    agregarTemas
 };

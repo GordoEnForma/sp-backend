@@ -68,7 +68,7 @@ const agregarATema = async (temaId, preguntaId) => {
 const actualizarTema = async (temaId, createdPregunta) => {
   const updatedTema = await Tema.findByIdAndUpdate(
     temaId,
-    { $push: { preguntas: createdPregunta._id } },
+    { $addToSet: { preguntas: createdPregunta._id } },
     { returnDocument: "after" }
   );
   return updatedTema;

@@ -1,6 +1,6 @@
 const express=require('express');
 const router=express.Router();
-const { createProducto, getProductos, agregarTema, getProductoById } = require('../../controllers/admin/productoController');
+const { createProducto, getProductos, getProductoById, agregarTemas } = require('../../controllers/admin/productoController');
 
 
 
@@ -10,6 +10,6 @@ router.route('/')
 
 router.route('/:id')
 .get(getProductoById)
-.put(agregarTema);
+.put(agregarTemas);
 
 module.exports=router;
