@@ -69,7 +69,27 @@ const getUserById=async(req, res)=>{
     }
 }
 //Update
+const updateStudent=async(req, res)=>{
+    try{
+        const id=req.params.id;
+        const updatedStudent=await Student.findByIdAndUpdate(id,req.body);
+        res.status(200).send({data:updatedStudent});
+    }catch(e){
+        console.log("Error al actualizar estudiante");
+        res.status(400).send("Error al actualizar estudiante");
+    }
+}
 
+const updateAdmin=async(req, res)=>{
+    try{
+        const id=req.params.id;
+        const updatedAdmin=await Admin.findByIdAndUpdate(id,req.body);
+        res.status(200).send({data:updatedAdmin});
+    }catch(e){
+        console.log("Error al actualizar admin");
+        res.status(400).send("Error al actualizar admin");
+    }
+}
 //Delete
 
 module.exports={
@@ -79,4 +99,6 @@ module.exports={
     getAdminUsers,
     getStudentUsers,
     getUserById,
+    updateStudent,
+    updateAdmin
 }

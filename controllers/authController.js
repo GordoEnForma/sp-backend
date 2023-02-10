@@ -30,7 +30,13 @@ const loginUser = async (req, res) => {
         }
         switch (foundUser.role) {
             case 'admin':{
-                res.status(200).send("Accediste correctamente como admin");
+                res.status(200).send({
+                    data:{
+                        id:foundUser.id,
+                        nombre:foundUser.nombre,
+                        apellido:foundUser.apellidom
+                    }
+                });
             }
                 
                 break;
@@ -38,7 +44,13 @@ const loginUser = async (req, res) => {
                 if(foundUser.estado==='pendiente'){
                     res.status(200).send("Usuario estudiante pendiente de activación");
                 }else{
-                    res.status(200).send("Accediste correctamente como estudiante");
+                    res.status(200).send({
+                        data:{
+                            id:foundUser.id,
+                            nombre:foundUser.nombre,
+                            apellido:foundUser.apellidom
+                        }
+                    });
                 }
             }
             default:
