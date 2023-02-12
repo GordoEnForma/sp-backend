@@ -34,7 +34,8 @@ const loginUser = async (req, res) => {
                     data:{
                         id:foundUser.id,
                         nombre:foundUser.nombre,
-                        apellido:foundUser.apellidom
+                        apellido:foundUser.apellido,
+                        role:foundUser.role,
                     }
                 });
             }
@@ -48,7 +49,8 @@ const loginUser = async (req, res) => {
                         data:{
                             id:foundUser.id,
                             nombre:foundUser.nombre,
-                            apellido:foundUser.apellidom
+                            apellido:foundUser.apellido,
+                            role:foundUser.role,
                         }
                     });
                 }
