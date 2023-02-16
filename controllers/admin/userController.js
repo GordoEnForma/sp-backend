@@ -72,7 +72,7 @@ const getUserById=async(req, res)=>{
 const updateStudent=async(req, res)=>{
     try{
         const id=req.params.id;
-        const updatedStudent=await Student.findByIdAndUpdate(id,req.body);
+        const updatedStudent=await Student.findByIdAndUpdate(id,req.body,{ returnDocument: "after" });
         res.status(200).send({data:updatedStudent});
     }catch(e){
         console.log("Error al actualizar estudiante");
