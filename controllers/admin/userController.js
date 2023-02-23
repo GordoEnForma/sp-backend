@@ -83,7 +83,7 @@ const updateStudent=async(req, res)=>{
 const updateAdmin=async(req, res)=>{
     try{
         const id=req.params.id;
-        const updatedAdmin=await Admin.findByIdAndUpdate(id,req.body);
+        const updatedAdmin=await Admin.findByIdAndUpdate(id,req.body,{ returnDocument: "after" });
         res.status(200).send({data:updatedAdmin});
     }catch(e){
         console.log("Error al actualizar admin");
@@ -91,6 +91,16 @@ const updateAdmin=async(req, res)=>{
     }
 }
 //Delete
+const deleteStudent=async(req, res)=>{
+    try{
+        const id=req.params.id;
+        const deletedStudent=await Student.findByIdAndRemove(id,{ returnDocument: "after" });
+        res.status(200).send({data:deletedStudent});
+    }catch(e){
+        console.log("Error al eliminar estudiante");
+        res.status(400).send("Error al eliminar estudiante");
+    }
+}
 
 module.exports={
     createAdmin,
@@ -100,5 +110,6 @@ module.exports={
     getStudentUsers,
     getUserById,
     updateStudent,
-    updateAdmin
+    updateAdmin,
+    deleteStudent
 }

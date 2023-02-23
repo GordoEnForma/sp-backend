@@ -8,6 +8,7 @@ const {
     createStudent,
     updateStudent,
     updateAdmin,
+    deleteStudent,
 } = require("../../controllers/admin/userController");
 
 const router = express.Router();
@@ -28,7 +29,8 @@ router.route("/estudiante")
 .get(getStudentUsers);
 
 router.route("/estudiante/:id")
-.put(updateStudent);
+.put(updateStudent)
+.delete(deleteStudent)
 
 router.route("/:id")
 .get(getUserById);

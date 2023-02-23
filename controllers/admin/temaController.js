@@ -39,7 +39,7 @@ const getTemaById = async (req, res) => {
     }
 };
 
-/*------------------Por revisar-------------------------------*/
+
 const agregarPreguntasATema = async (req, res) => {
     try {
         const temaId = req.params.id;
@@ -54,9 +54,24 @@ const agregarPreguntasATema = async (req, res) => {
     }
 };
 
+//Delete
+const removeTemaById = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const deletedTema = await Tema.findByIdAndRemove(id, {
+            returnDocument: "after",
+        });
+        res.status(200).send({ data: deletedTema });
+    } catch (e) {
+        console.log("Error al eliminar tema");
+        res.status(400).send("Error al eliminar tema");
+    }
+};
+
 module.exports = {
     createTema,
     getTemas,
     getTemaById,
     agregarPreguntasATema,
+    removeTemaById
 };
