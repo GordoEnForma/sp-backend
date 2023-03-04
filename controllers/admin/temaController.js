@@ -1,5 +1,5 @@
 const Tema = require("../../models/tema");
-const { agregarATema } = require("./preguntaController");
+const { agregarPreguntaExistenteATema } = require("./preguntaController");
 
 const createTema = async (req, res) => {
     try {
@@ -45,7 +45,7 @@ const agregarPreguntasATema = async (req, res) => {
         const temaId = req.params.id;
         const preguntasId = req.body.preguntas;
         for (e of preguntasId) {
-            agregarATema(temaId, e);
+            agregarPreguntaExistenteATema(temaId, e);
         }
         res.status(200).send({ data: "Preguntas agregadas" });
     } catch (e) {

@@ -1,14 +1,15 @@
 const express=require('express');
-const { createPregunta, getPreguntas,getPreguntaById } = require('../../controllers/admin/preguntaController');
+const { createPregunta, getPreguntas,getPreguntaById, eliminarPregunta } = require('../../controllers/admin/preguntaController');
 const router=express.Router();
 
 router.route('/:temaId')
-.post(createPregunta);
+.post(createPregunta)
+.delete(eliminarPregunta);
 
 router.route('/')
 .get(getPreguntas);
 
 router.route('/:id')
-.get(getPreguntaById);
+.get(getPreguntaById)
 
 module.exports=router;

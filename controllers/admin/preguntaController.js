@@ -10,7 +10,8 @@ const createPregunta = async (req, res) => {
             ...fetchedPregunta,
             tema: temaId,
         });
-        const updatedTema = await actualizarTema(temaId, createdPregunta);
+        const updatedTema = await actualizarTemaPreguntaExtra(temaId, createdPregunta);
+
         res.status(200).send({
             data: createdPregunta,
             updatedTema,
@@ -51,14 +52,14 @@ const getPreguntaById = async (req, res) => {
 
 //Update
 
-const agregarATema = async (temaId, preguntaId) => {
+const agregarPreguntaExistenteATema = async (temaId, preguntaId) => {
     try {
         const updatedPregunta = await Pregunta.findByIdAndUpdate(
             preguntaId,
             { tema: temaId },
             { returnDocument: "after" }
         );
-        const updatedTema = await actualizarTema(temaId, updatedPregunta);
+        const updatedTema = await actualizarTemaPreguntaExtra(temaId, updatedPregunta);
         return updatedTema;
     } catch (e) {
         console.log(
@@ -69,20 +70,48 @@ const agregarATema = async (temaId, preguntaId) => {
     }
 };
 
-const actualizarTema = async (temaId, createdPregunta) => {
+const actualizarTemaPreguntaExtra = async (temaId, createdPregunta) => {
     const updatedTema = await Tema.findByIdAndUpdate(
         temaId,
         { $addToSet: { preguntas: createdPregunta._id } },
         { returnDocument: "after" }
     );
+    console.log("TEMA: ", updatedTema);
     return updatedTema;
 };
 
+const actualizarTemaPreguntaEliminada=async(temaId,deletedPreguntaId)=>{
+    const updatedTema=await Tema.findByIdAndUpdate(
+        temaId,
+        {$pull:{preguntas:deletedPreguntaId}},
+        {returnDocument:"after"}
+    );
+    console.log("TEMA FN SECUNDARIA: ",updatedTema);
+    return updatedTema;
+}
+
 //Delete
+const eliminarPregunta= async(req,res)=>{
+    try {
+        const temaId = req.params.temaId;
+        const preguntaId = req.body.preguntaId;
+        const updatedTema = await actualizarTemaPreguntaEliminada(temaId, preguntaId);
+        const deletedPregunta = await Pregunta.findByIdAndRemove(preguntaId);
+
+        res.status(200).send({
+            data: deletedPregunta,
+            updatedTema,
+        });
+    } catch (e) {
+        console.log("Error al eliminar pregunta: ", e);
+        res.status(400).send("Error al eliminar pregunta");
+    }
+}
 
 module.exports = {
     createPregunta,
     getPreguntas,
     getPreguntaById,
-    agregarATema,
+    agregarPreguntaExistenteATema,
+    eliminarPregunta
 };

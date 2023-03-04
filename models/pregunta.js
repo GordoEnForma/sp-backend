@@ -32,6 +32,4 @@ const preguntaSchema=new mongoose.Schema({
     },
 },{timestamps:true})
 
-//Prueba de cuentas de git
-    
 module.exports=mongoose.model('Pregunta',preguntaSchema)
