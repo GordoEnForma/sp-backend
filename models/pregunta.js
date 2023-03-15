@@ -1,35 +1,31 @@
-const mongoose=require('mongoose');
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const opciones=['A','B','C','D','E'];
-/*
-alternativa={
-    opcion:'A',
-    descripcion:'lorem ipsum',
-}
+const preguntaSchema = new Schema(
+    {
+        orden: {
+            type: String,
+            required: true,
+        },
+        descripcion: {
+            type: String,
+            required: true,
+        },
+        alternativas: [],
+        justificacion: {
+            type: String,
+            required: true,
+        },
+        tema: {
+            ref: "Tema",
+            type: Schema.Types.ObjectId,
+        },
+    },
+    {
+        timestamps: true,
+    }
+);
 
-*/
+const Pregunta = mongoose.model("Pregunta", preguntaSchema);
 
-const preguntaSchema=new mongoose.Schema({
-    orden:{
-        type:Number,
-        required:true,
-    },
-    descripcion:{
-        type:String,
-        required:true,
-    },
-    tema:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'Tema'
-    },
-    alternativas:[],
-    opcionCorrecta:{
-        type:String,
-        enum:opciones,
-    },
-    justificacion:{
-        type:String,
-    },
-},{timestamps:true})
-
-module.exports=mongoose.model('Pregunta',preguntaSchema)
+module.exports = Pregunta;

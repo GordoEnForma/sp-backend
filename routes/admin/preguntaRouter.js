@@ -1,15 +1,28 @@
-const express=require('express');
-const { createPregunta, getPreguntas,getPreguntaById, eliminarPregunta } = require('../../controllers/admin/preguntaController');
-const router=express.Router();
+const express = require("express");
+const {
+    createPregunta,
+    getPreguntas,
+    getPreguntaById,
+    actualizarPreguntaExistente,
+    eliminarPregunta,
+    eliminarPreguntasDeTema,
+    eliminarTodasLasPreguntas,
+} = require("../../controllers/admin/preguntaController");
+const router = express.Router();
 
-router.route('/:temaId')
-.post(createPregunta)
-.delete(eliminarPregunta);
+router.route("/")
+    .get(getPreguntas)
+    .delete(eliminarTodasLasPreguntas);
 
-router.route('/')
-.get(getPreguntas);
+router
+    .route("/:id")
+    .get(getPreguntaById)
+    .put(actualizarPreguntaExistente)
+    .delete(eliminarPregunta);
 
-router.route('/:id')
-.get(getPreguntaById)
+router
+    .route("/temas/:temaId")
+    .post(createPregunta)
+    .delete(eliminarPreguntasDeTema);
 
-module.exports=router;
+module.exports = router;

@@ -30,9 +30,10 @@ const getTemaById = async (req, res) => {
         const temaId = req.params.id;
         const tema = await Tema.findById(temaId).populate(
             "preguntas",
-            "descripcion"
+            // "tema",
+            // ["descripcion","orden"]
         );
-        res.status(200).send({ data: tema });
+        res.status(200).send(tema);
     } catch (e) {
         console.log("Error al obtener el tema");
         res.status(400).send("Error al obtener el tema");
@@ -68,10 +69,13 @@ const removeTemaById = async (req, res) => {
     }
 };
 
+
+
 module.exports = {
     createTema,
     getTemas,
     getTemaById,
     agregarPreguntasATema,
-    removeTemaById
+    removeTemaById,
+    
 };
